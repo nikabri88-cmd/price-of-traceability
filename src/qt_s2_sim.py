@@ -1,7 +1,7 @@
 """QT-S2 – Price of traceability under realistic optics (noise + path-dependent loss).
 
 See QT-S2_preregistration.md. Reuses the QT-S1 model from qt_s1_sim.py.
-Usage: python qt_s2_sim.py [smoke]
+Usage: python qt_s2_sim.py [smoke | rerun_loss]
 """
 import os
 os.environ.setdefault("OMP_NUM_THREADS", "1")
@@ -113,13 +113,17 @@ def reinforce2(gamma, sigma, eps_loss, seeds=range(20), T=4000, ckpt=100, n_eval
         a = np.minimum((cum < u[:, None]).sum(axis=1), 3)
         rwd = (clicked & (a == TARGET[s])).astype(float)
 
-        if clicked.any():
-            pert = np.concatenate([xn[:, None] + fd * I[None], xn[:, None] - fd * I[None]], axis=1)
-            pp, _ = forward2(pert.reshape(-1, NP), G, eps_loss)
-            pp = pp.reshape(B, 2 * NP, 4, 4)[ar[:, None], np.arange(2 * NP)[None], s[:, None], a[:, None]]
-            lp = np.log(np.clip(pp, 1e-12, 1.0))
-            g = (lp[:, :NP] - lp[:, NP:]) / (2 * fd)
-            x += LR * ((rwd - base) * clicked)[:, None] * g
+        # Score function of the observed outcome: action a if the photon clicked, "no click" otherwise.
+        # (Bug fix after independent review: the first version skipped no-click episodes, which adds a
+        # bias of -b * grad P(click) under loss. With epsilon = 0 no-click never occurs and nothing changes.)
+        pert = np.concatenate([xn[:, None] + fd * I[None], xn[:, None] - fd * I[None]], axis=1)
+        pp, _ = forward2(pert.reshape(-1, NP), G, eps_loss)
+        pp = pp.reshape(B, 2 * NP, 4, 4)[ar[:, None], np.arange(2 * NP)[None], s[:, None]]   # (B, 2NP, A)
+        p_obs = np.where(clicked[:, None], pp[ar[:, None], np.arange(2 * NP)[None], a[:, None]],
+                         1.0 - pp.sum(axis=2))
+        lp = np.log(np.clip(p_obs, 1e-12, 1.0))
+        g = (lp[:, :NP] - lp[:, NP:]) / (2 * fd)
+        x += LR * (rwd - base)[:, None] * g
         base = 0.95 * base + 0.05 * rwd
         if t % ckpt == 0:
             if sigma == 0:
@@ -150,6 +154,29 @@ def run_condition(cond):
     return row, curve.tolist()
 
 
+def rerun_loss_learners():
+    """Re-run only the series L learners after the baseline fix; ceilings are unaffected and reused."""
+    conds = [("L", g, 0.0, e) for e in EPSILONS for g in GAMMAS]
+    with Pool(2) as pool:
+        out = pool.map(_learner_only, conds, chunksize=1)
+    json.dump({"note": "series L learners re-run after the no-click baseline fix", "rows": [r for r, _ in out],
+               "curves": {f"L|{r['gamma']}|0.0|{r['epsilon']}": c for r, c in out}},
+              open("QT-S2_L_learners_fixed.json", "w"), indent=2)
+
+
+def _learner_only(cond):
+    series, gamma, sigma, eps_loss = cond
+    curve, info_end = reinforce2(gamma, sigma, eps_loss)
+    fin = curve[-1]
+    row = {"series": series, "gamma": gamma, "sigma": sigma, "epsilon": eps_loss,
+           "reinforce_final_median": float(np.median(fin)),
+           "reinforce_final_q25": float(np.quantile(fin, 0.25)),
+           "reinforce_final_q75": float(np.quantile(fin, 0.75)),
+           "reinforce_info_end_median": float(np.median(info_end))}
+    print(json.dumps(row), flush=True)
+    return row, curve.tolist()
+
+
 def conditions():
     out = [("N", g, s, 0.0) for s in SIGMAS for g in GAMMAS]
     out += [("L", g, 0.0, e) for e in EPSILONS for g in GAMMAS]
@@ -157,6 +184,9 @@ def conditions():
 
 
 if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "rerun_loss":
+        rerun_loss_learners()
+        sys.exit()
     if len(sys.argv) > 1 and sys.argv[1] == "smoke":
         t0 = time.time()
         print(ceiling2(1.0, 0.1, 0.0, steps=40), round(time.time() - t0, 1), "s ceiling(40 steps)")

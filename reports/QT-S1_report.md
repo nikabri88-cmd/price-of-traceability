@@ -1,6 +1,8 @@
 # QT-S1 – Results
 
-Price of traceability in a single-photon learning agent. Run 2026-10-13 against the pre-registration locked the same day (QT-S1_preregistration.md).
+Price of traceability in a single-photon learning agent. Run 2026-10-13 against the protocol fixed before the run the same day (QT-S1_preregistration.md).
+
+**Corrected after independent review (2026-10-13).** "Logged path info" below means the Holevo information χ of the which-path marker, an upper bound on extractable path information; no readout is simulated. Findings 1–3 are reworded accordingly; see the README section "Corrections after independent review".
 
 ## Pilot
 
@@ -8,7 +10,7 @@ Learning rate chosen at gamma = 1 on seeds 100–119, mean final accuracy: 0.02 
 
 ## Price of traceability (M1 ceiling)
 
-| gamma | pairwise D | logged path info, bits/decision | max accuracy | cost, points |
+| gamma | pairwise D | path information in marker (χ), bits/decision | max accuracy | cost, points |
 |---|---|---|---|---|
 | 1.0 | 0.00 | 0.00 | 1.000 | 0 |
 | 0.95 | 0.31 | 0.17 | 0.975 | 2.5 |
@@ -28,13 +30,13 @@ Learning rate chosen at gamma = 1 on seeds 100–119, mean final accuracy: 0.02 
 
 ## Findings
 
-1. **The price is non-linear.** The first 0.29 bit of path log per decision costs 5 accuracy points. Going from 0.47 to 0.97 bit costs 30 points. Partial traceability is cheap; the last bits are expensive.
-2. **A complete log turns the optimal agent classical.** At gamma = 0 the best agent stops using superposition: its deliberation becomes a single path, fully traceable and blind to phase-carried task information.
-3. **Exploratory, not pre-registered: learners under heavy logging drift classical.** At gamma = 0.2 learning agents end with 0.55 bit of loggable path information versus 0.97 at the ceiling; at gamma = 0 they end at 0.07 bit. Median learners reach 91–100% of their ceiling at every gamma.
+1. **The price is non-linear.** A marker holding up to 0.29 bit per decision costs 5 accuracy points; the step from 0.47 to 0.97 bit costs 30 points, and the last half bit (0.5 → 1) costs 39. The first bits are cheap; the last bits are expensive.
+2. **Complete monitoring makes interference useless.** At gamma = 0 the best accuracy is 50%, no better than a classical agent. The optimum is degenerate: the optimiser here found a single-path solution, but superposed solutions score the same, so superposition becomes useless without being forced out.
+3. **Exploratory, not pre-registered: learners under heavy monitoring use less superposition than the optimum.** At gamma = 0.2 learning agents end with 0.55 bit of path information in the marker versus 0.97 at the ceiling. Median learners reach 91–100% of their ceiling at every gamma.
 
 ## Reading for agent governance
 
-Requiring a complete record of a quantum agent's deliberation does two things at once: it removes the part of performance carried by interference, and it pushes the agent toward classical deliberation. Requiring a partial record is cheap. In this toy, auditing at the level of inputs, outputs, learned parameters and run statistics costs nothing, and each bit of per-decision path record has a measurable price set by the Englert duality relation.
+Monitoring a quantum agent's deliberation completely removes the part of performance carried by interference: the agent can do no better than a classical one. Partial monitoring costs little at first, and its price rises steeply with the last bits. In this toy, auditing at the level of inputs, outputs, learned parameters and run statistics costs nothing, and each bit of per-decision path record has a measurable price set by the Englert duality relation.
 
 ## Limits
 

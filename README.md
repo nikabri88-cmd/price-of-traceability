@@ -2,7 +2,7 @@
 
 What happens to a quantum learning agent when you keep a record of how it decides?
 
-This repository holds two small simulation studies of a photonic learning agent in the spirit of Flamini et al. (New J. Phys. 22, 045002, 2020). The agent deliberates by sending one photon through a mesh of tunable beamsplitters; the detected output mode is its action. We add a log that records which internal path the photon took, with adjustable completeness, and measure how much task performance the agent loses per bit of logged deliberation.
+This repository holds two small simulation studies of a photonic learning agent in the spirit of Flamini et al. (New J. Phys. 22, 045002, 2020). The agent deliberates by sending one photon through a mesh of tunable beamsplitters; the detected output mode is its action. We add a which-path marker that becomes correlated with the photon's internal path, with adjustable strength, and measure how much task performance the best agent loses per bit of path information the marker holds. That information is the Holevo quantity χ: an upper bound on what any readout of the marker could extract. The marker readout itself is not simulated.
 
 The trade-off itself follows from the Englert duality relation (D² + V² ≤ 1): recording the path suppresses interference. The studies ask what that means for a reward-driven agent, and how it behaves on imperfect hardware.
 
@@ -10,25 +10,41 @@ The trade-off itself follows from the Englert duality relation (D² + V² ≤ 1)
 
 **QT-S1, ideal optics** ([report](reports/QT-S1_report.md))
 
-- Partial logs are cheap: 0.29 bit of path log per decision costs 5 accuracy points.
-- The last bits are expensive: going from 0.47 to 0.97 bit costs 30 points.
-- Under a complete log the optimal agent drops superposition entirely and deliberates classically.
-- Learning agents drift toward classical deliberation under a heavy log (exploratory).
+- The first bits are cheap: a marker holding up to 0.29 bit per decision costs 5 accuracy points.
+- The last bits are expensive: the last half bit (0.5 → 1 bit) costs 39 points.
+- Under complete monitoring the best accuracy is 50%, no better than a classical agent. The optimum is degenerate there: single-path and superposed agents score the same, so superposition becomes useless without being forced out.
+- Learning agents end with less path superposition under heavy monitoring than the optimum uses (exploratory).
 
 ![QT-S1](results/QT-S1/QT-S1_figure.png)
 
 **QT-S2, mirror noise and photon loss** ([report](reports/QT-S2_report.md))
 
 - The shape of the price survives mirror noise: the last bits cost about 4.6 times more per bit than the first ones at every noise level tested.
-- Imperfect hardware is cheaper to audit in absolute terms: at 0.2 rad of noise a complete log costs 0.32 accuracy instead of 0.50.
-- With 30% photon loss on the phase-carrying paths, the agent retreats from superposition already under a partial log.
+- Imperfect hardware loses less to complete monitoring in absolute terms: at 0.2 rad of noise it costs 0.32 accuracy instead of 0.50.
+- With 30% photon loss on the phase-carrying paths, stronger monitoring shifts the optimum toward the lossless paths (share of probability on the lossy paths 41% with no monitoring, 17% at gamma_log = 0.2) and reduces its use of interference. Accuracy stays above the classical 50% (53.7% at gamma_log = 0.2).
 - Learning tolerates mirror noise up to 0.2 rad.
 
 ![QT-S2](results/QT-S2/QT-S2_figure.png)
 
 **Post-hoc check, not pre-registered** (`src/qt_s2_posthoc_dense.py`, `results/QT-S2/QT-S2_posthoc_dense_loss.json`)
 
-The pre-registered grid had four log levels, so a chart connecting them hid the shape of the loss curve. A dense grid (log strength in steps of 0.05, exact ceilings) shows it: with 30% loss the loggable path information rises to 0.77 bit at gamma_log = 0.4 and then falls to 0.13 bit at gamma_log = 0.05, as the agent moves the photon off the lossy paths. With ideal optics the ceiling follows the QT-S1 bound at all 20 levels.
+The pre-registered grid had four log levels, so a chart connecting them hid the shape of the loss curve. A dense grid (log strength in steps of 0.05, exact ceilings) shows it: with 30% loss the path information held by the marker rises to 0.77 bit at gamma_log = 0.4 and then falls to 0.13 bit at gamma_log = 0.05, as the optimum moves the photon off the lossy paths. With ideal optics the ceiling follows the QT-S1 bound at all 20 levels.
+
+## Closed form
+
+For the noiseless model the ceiling has a closed form, found in an independent review of this repository:
+
+A_max = (2 - ε + sqrt(ε² + 4γ²(1 - ε))) / 4,
+
+with ε the loss on the phase-carrying paths and γ the coherence the marker leaves. It matches all 63 stored noiseless ceilings to 5e-12 and reduces to (1 + γ)/2 at ε = 0. The shift of the optimum under loss therefore follows from the optics of the task itself; the figures show direct optimisation, not learning trajectories.
+
+## Corrections after independent review (2026-10-13)
+
+1. **Axis meaning.** Earlier text called the x-axis "logged bits". It is the Holevo information χ of the which-path marker, an upper bound on extractable path information; no readout is simulated.
+2. **Complete monitoring.** Earlier text said the optimal agent "drops superposition". The optimum is degenerate: QT-S1 found a single-path solution (0 bit), QT-S2 under identical conditions found one holding 0.49 bit, and an equal two-path superposition (1 bit) scores the same 50%. Interference becomes useless; superposition is not forced out.
+3. **Loss.** Earlier text said the agent "retreats from superposition". It shifts probability toward lossless paths and uses interference less, while staying above 50%.
+4. **Arithmetic.** Earlier text said "the next half bit costs 30 points". From 0.29 to 0.79 bit the cost is 18.5 points; the 30 points belong to the step from 0.47 to 0.97 bit, and the last half bit (0.5 → 1) costs 39.
+5. **Learning under loss (code bug).** `reinforce2()` skipped episodes where the photon was lost. With a reward baseline b this adds a bias of -b ∇P(click). Fixed by including the no-click outcome in the score function; the loss-series learners were re-run (`results/QT-S2/QT-S2_L_learners_fixed.json`). Ceilings and all lossless results are unaffected; the fixed code reproduces the lossless learner curves exactly.
 
 ## Hypothesis verdicts
 
@@ -63,6 +79,7 @@ python ../../src/qt_s1_analyze.py
 cd ../QT-S2
 python ../../src/qt_s2_sim.py
 python ../../src/qt_s2_analyze.py
+python ../../src/qt_s2_sim.py rerun_loss   # series L learners after the baseline fix, about 15 min
 python ../../src/qt_s2_posthoc_dense.py   # post-hoc dense grid, about 3 min
 
 # Images for the X post
@@ -92,7 +109,7 @@ social/      images used in public posts and the script that draws them from res
 
 ## Feedback welcome
 
-Physicists especially: is the retreat from superposition under path-dependent loss already known from the which-path literature, and what would break first on a real integrated chip? Please open an issue.
+Physicists especially: is the shift of the optimum toward lossless paths under path monitoring already known from the which-path literature, and what would break first on a real integrated chip? Please open an issue.
 
 ## Citation and license
 

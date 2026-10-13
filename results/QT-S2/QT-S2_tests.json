@@ -67,7 +67,7 @@
       "cost_per_bit_first": 0.14796962043827788,
       "cost_per_bit_last": null,
       "ratio_last_over_first": null,
-      "note": "undefined: logged information does not grow across the segment (optimal agent retreats from superposition)",
+      "note": "undefined: logged information does not grow across the segment (optimum shifts toward lossless paths)",
       "setting": "epsilon=0.3",
       "kind": "epsilon",
       "level": 0.3

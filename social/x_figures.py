@@ -30,7 +30,7 @@ def frame(title, subtitle):
     fig.text(0.08, 0.92, title, fontsize=21, color=INK, weight="bold")
     fig.text(0.08, 0.865, subtitle, fontsize=14, color=INK2)
     fig.text(0.08, 0.035, FOOT, fontsize=11, color=MUTED)
-    ax.set_xlabel("Path information in the log, bits per decision")
+    ax.set_xlabel("Path information held by the which-path marker (Holevo χ, bits per decision)")
     ax.set_ylabel("Best achievable accuracy")
     ax.set_xlim(-0.02, 1.02)
     ax.set_ylim(0.48, 1.03)
@@ -41,34 +41,38 @@ def frame(title, subtitle):
 s1 = json.load(open("results/QT-S1/QT-S1_results.json"))["rows"]
 pts = [(r["info_opt_bits"], r["acc_max"]) for r in s1 if r["gamma"] > 0]
 fig, ax = frame("The price of watching a quantum agent think",
-                "First bits of the log are cheap, the last ones are expensive. Each point: best agent for that log")
-acc = np.linspace(0.5, 1.0, 400)
+                "First bits of path information are cheap, the last ones are expensive. Points: best agents")
+acc = np.linspace(0.5, 1.0, 4000)
+h2_inv_half = acc[np.argmin(np.abs(h2(acc) - 0.5))]          # accuracy where 0.5 bit is reached (0.89)
 ax.plot(h2(acc), acc, color=INK2, lw=2, zorder=2)
 cheap = acc >= 0.95
-dear = (acc <= 0.9) & (acc >= 0.6)
+dear = acc <= h2_inv_half
 ax.plot(h2(acc[cheap]), acc[cheap], color=BLUE, lw=9, alpha=0.35, solid_capstyle="round", zorder=1)
 ax.plot(h2(acc[dear]), acc[dear], color=ORANGE, lw=9, alpha=0.35, solid_capstyle="round", zorder=1)
 ax.scatter(*zip(*pts), s=90, color=INK2, edgecolor=SURF, linewidth=2, zorder=3)
 ax.annotate("First 0.29 bit\ncosts 5 points", (0.14, 0.976), xytext=(0.06, 0.80), color=BLUE, fontsize=15,
             weight="bold", arrowprops=dict(arrowstyle="-", color=BLUE, lw=1.5))
-ax.annotate("The next 0.5 bit\ncosts 30 points", (0.80, 0.765), xytext=(0.42, 0.62), color=ORANGE, fontsize=15,
+ax.annotate("The last half bit\ncosts 39 points", (0.80, 0.765), xytext=(0.42, 0.62), color=ORANGE, fontsize=15,
             weight="bold", arrowprops=dict(arrowstyle="-", color=ORANGE, lw=1.5))
-ax.text(1.0, 1.0, "Complete log: the best agent\ndrops superposition and\ndeliberates classically",
+ax.text(1.0, 1.0, "Complete monitoring: 50%,\nno better than a classical agent",
         ha="right", va="top", fontsize=12, color=INK2, transform=ax.transAxes)
 fig.savefig("social/X_image1_price.png", dpi=150, facecolor=SURF)
 
 # ---- Image 2: under photon loss the agent backs off (QT-S2 post-hoc dense grid) ----
 d = json.load(open("results/QT-S2/QT-S2_posthoc_dense_loss.json"))["rows"]
-fig, ax = frame("Lossy optics: under a strong log, the agent backs off",
-                "Best agent as the log grows (dot = step of 0.05, post-hoc grid). Ideal optics vs 30% loss on some paths")
+fig, ax = frame("Lossy optics: monitoring pushes the agent off lossy paths",
+                "Best agent as monitoring grows (dot = step of 0.05, post-hoc grid). Ideal optics vs 30% loss on some paths")
 for eps, col, lab, xy in ((0.0, BLUE, "Ideal optics", (0.40, 0.935)), (0.3, ORANGE, "30% photon loss", (0.02, 0.765))):
     rows = [r for r in d if r["epsilon"] == eps]
     ax.plot([r["info_opt_bits"] for r in rows], [r["acc_max"] for r in rows], "-o", color=col, lw=2.5, ms=6,
             mec=SURF, mew=1.5, zorder=3)
     ax.text(*xy, lab, color=col, fontsize=15, weight="bold")
 peak = max((r for r in d if r["epsilon"] == 0.3), key=lambda r: r["info_opt_bits"])
-ax.annotate("From here on, a stronger log finds less to record:\nthe agent moves the photon off the lossy paths",
+ax.annotate("From here on, stronger monitoring shifts the optimum\ntoward lossless paths and uses less interference",
             (peak["info_opt_bits"], peak["acc_max"]), xytext=(0.06, 0.635), color=INK2, fontsize=14,
             arrowprops=dict(arrowstyle="->", color=MUTED, lw=1.5))
+end = next(r for r in d if r["epsilon"] == 0.3 and abs(r["gamma"] - 0.2) < 1e-9)
+ax.annotate("At this point still 53.7%, above the classical 50%:\ninterference is used less, not abandoned", (end["info_opt_bits"], end["acc_max"]),
+            xytext=(0.06, 0.545), color=INK2, fontsize=12, arrowprops=dict(arrowstyle="-", color=MUTED, lw=1))
 fig.savefig("social/X_image2_loss.png", dpi=150, facecolor=SURF)
 print("saved")

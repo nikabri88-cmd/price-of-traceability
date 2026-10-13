@@ -1,6 +1,8 @@
 # QT-S2 – Results
 
-Price of traceability under realistic optics. Run 2026-10-13 against the pre-registration locked the same day (QT-S2_preregistration.md). 30 conditions, 20 learner seeds each.
+Price of traceability under realistic optics. Run 2026-10-13 against the protocol fixed before the run the same day (QT-S2_preregistration.md). 30 conditions, 20 learner seeds each.
+
+**Corrected after independent review (2026-10-13).** Path information means the Holevo χ of the which-path marker. Findings 3 and the governance reading are reworded: under loss the optimum uses interference less without abandoning it. The learners of series L were affected by a code bug (no-click episodes skipped, bias -b ∇P(click)); they were re-run after the fix, see "Learners under loss after the fix". Ceilings and all lossless results are unaffected.
 
 ## Built-in replication check
 
@@ -28,8 +30,27 @@ First segment: gamma_log 1.0 → 0.9. Last segment: gamma_log 0.6 → 0.2. Cost 
 ## Exploratory
 
 - **E1, loss compensation.** With no log, the optimal agent takes an intermediate strategy: it puts less amplitude into the lossy path (pre-loss weight ratio about 1 - epsilon; post-loss balance 0.81 at epsilon 0.1 and 0.49 at 0.3), trading a little interference for more clicks. Ceiling = 1 - epsilon/2; accuracy given a click 0.997 and 0.970. A heavier log strengthens the retreat (post-loss balance 0.14 at gamma_log 0.2, epsilon 0.3).
-- **E2, classical drift of learners.** End-of-training loggable information shows no trend with sigma (gamma_log 0.6: 0.72–0.74 bit; gamma_log 0.2: 0.52–0.61 bit against ceilings of 0.97–1.01). The QT-S1 drift toward classical deliberation under a heavy log replicates at every noise level.
+- **E2, superposition kept by learners.** End-of-training path information in the marker shows no trend with sigma (gamma_log 0.6: 0.72–0.74 bit; gamma_log 0.2: 0.52–0.61 bit against ceilings of 0.97–1.01). The QT-S1 pattern of learners using less superposition than the optimum under heavy monitoring replicates at every noise level.
 - At gamma_log = 0 the optimum stays degenerate (any path distribution gives accuracy 0.5), so logged information there carries no meaning. With sigma = 0.2 the noisy optimum spreads amplitude over more than two paths, so its loggable information slightly exceeds 1 bit (the measure allows up to 2 bits with 4 paths).
+
+## Learners under loss after the fix
+
+Series L learners re-run with the corrected score function (`python ../../src/qt_s2_sim.py rerun_loss`, results in QT-S2_L_learners_fixed.json). The learner columns for series L in QT-S2_summary.csv are superseded; the original files are kept unchanged for transparency.
+
+| epsilon | gamma_log | ceiling | learner median, original → fixed | path information at end (χ), original → fixed |
+|---|---|---|---|---|
+| 0.1 | 1.0 | 0.950 | 0.897 → 0.914 | 0.00 → 0.00 |
+| 0.1 | 0.9 | 0.903 | 0.888 → 0.876 | 0.29 → 0.29 |
+| 0.1 | 0.6 | 0.761 | 0.749 → 0.748 | 0.73 → 0.73 |
+| 0.1 | 0.2 | 0.573 | 0.534 → 0.535 | 0.58 → 0.52 |
+| 0.1 | 0.0 | 0.500 | 0.481 → 0.494 | 0.03 → 0.05 |
+| 0.3 | 1.0 | 0.850 | 0.801 → 0.820 | 0.00 → 0.00 |
+| 0.3 | 0.9 | 0.809 | 0.785 → 0.781 | 0.29 → 0.28 |
+| 0.3 | 0.6 | 0.687 | 0.663 → 0.603 | 0.72 → 0.70 |
+| 0.3 | 0.2 | 0.537 | 0.502 → 0.515 | 0.52 → 0.36 |
+| 0.3 | 0.0 | 0.500 | 0.457 → 0.497 | 0.01 → 0.03 |
+
+As the bias predicts, the original learners under a complete log fell below 50% by losing photons; after the fix they reach about 50%. Other changes are within a few points, with one larger drop at epsilon 0.3, gamma_log 0.6, where the fixed learners spread more across seeds. No pre-registered hypothesis used series L learners, so the verdicts stand.
 
 ## Post-hoc check (not pre-registered)
 
@@ -38,13 +59,13 @@ A dense grid of log strength (steps of 0.05, exact ceilings, sigma = 0) for epsi
 ## Findings
 
 1. **The shape of the price survives mirror noise.** Noise scales the price curve down and keeps its convexity: the last bits cost about 4.6 times more per bit than the first ones at every sigma tested.
-2. **Imperfect hardware is cheaper to audit in absolute terms.** It has less interference to lose: at sigma = 0.2 rad a complete log costs 0.32 accuracy instead of 0.50.
-3. **Photon loss makes the agent retreat from superposition earlier.** In QT-S1 the retreat appeared only under a complete log. With 30% loss on the phase-carrying paths it starts already at a partial log.
+2. **Imperfect hardware loses less to complete monitoring in absolute terms.** It has less interference to lose: at sigma = 0.2 rad complete monitoring costs 0.32 accuracy instead of 0.50.
+3. **Under photon loss, monitoring shifts the optimum toward lossless paths.** With 30% loss on the phase-carrying paths, the share of probability on those paths falls from 41% with no monitoring to 17% at gamma_log = 0.2, and the optimum uses interference less; accuracy there is 53.7%, still above the classical 50%. The closed form A_max = (2 - ε + sqrt(ε² + 4γ²(1 - ε)))/4 (README) explains this from the optics of the task.
 4. **Learning tolerates mirror noise up to 0.2 rad.**
 
 ## Reading for agent governance
 
-Audit demands and hardware imperfections interact. The more imperfect the hardware, the cheaper a complete audit, and the sooner the agent answers audit pressure by deliberating classically. On lossy hardware, a per-decision log buys traceability partly by shrinking what there is to trace.
+Monitoring demands and hardware imperfections interact. The more imperfect the hardware, the less complete monitoring costs in absolute terms. On lossy hardware, stronger monitoring also moves the best agent toward lossless paths, so it uses interference less.
 
 ## Limits
 

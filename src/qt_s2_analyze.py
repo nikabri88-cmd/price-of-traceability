@@ -36,7 +36,7 @@ def price(rs):
     return {"C_full_log_cost": C, "dI_first": d_first, "dI_last": d_last,
             "cost_per_bit_first": first, "cost_per_bit_last": last, "ratio_last_over_first": ratio,
             "note": None if ratio else "undefined: logged information does not grow across the segment "
-                                       "(optimal agent retreats from superposition)"}
+                                       "(optimum shifts toward lossless paths)"}
 
 
 settings = [("sigma", s) for s in [0.0, 0.05, 0.1, 0.2]] + [("epsilon", e) for e in [0.1, 0.3]]
@@ -116,7 +116,7 @@ def price_panel(ax, kind, levels, ramp, title, lab):
         rs = [r for r in setting(kind, lvl) if r["gamma"] > 0]          # gamma = 0 is degenerate (0 bits)
         ax.plot([r["info_opt_bits"] for r in rs], [r["acc_max"] for r in rs], "-o", color=c, lw=2, ms=7,
                 mec=SURF, mew=2, label=f"{lab} = {lvl}")
-    ax.set_xlabel("Logged path information, bits per decision")
+    ax.set_xlabel("Path information in the which-path marker (Holevo χ, bits per decision)")
     ax.set_ylabel("Ceiling accuracy")
     ax.set_xlim(-0.03, 1.03)
     ax.set_ylim(0.45, 1.03)
@@ -127,7 +127,7 @@ def price_panel(ax, kind, levels, ramp, title, lab):
 price_panel(axs[0, 0], "sigma", [0.0, 0.05, 0.1, 0.2], RAMP4, "A. Price of traceability under mirror noise", "σ")
 price_panel(axs[0, 1], "epsilon", [0.0, 0.1, 0.3], RAMP3, "B. Price under path-dependent photon loss", "ε")
 _r = R[("L", 0.2, 0.0, 0.3)]
-axs[0, 1].annotate("ε = 0.3, γ = 0.2: agent retreats\nfrom superposition, log shrinks", (_r["info_opt_bits"], _r["acc_max"]),
+axs[0, 1].annotate("ε = 0.3, γ = 0.2: optimum shifts toward\nlossless paths, marker holds less", (_r["info_opt_bits"], _r["acc_max"]),
                    xytext=(0.12, 0.69), textcoords="data", color=INK2, fontsize=9,
                    arrowprops=dict(arrowstyle="-", color=MUTED, lw=1))
 

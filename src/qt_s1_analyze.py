@@ -111,9 +111,9 @@ for s in summary:
     if s["gamma"] in (0.95, 0.9, 0.6, 0.2):
         ax1.annotate(f"γ = {s['gamma']}", (s["logged_info_bits_M1"], s["acc_max_M1"]),
                      xytext=(8, 6), textcoords="offset points", color=INK2, fontsize=9)
-ax1.annotate("γ = 0: optimal agent drops superposition, log holds 0 bits", (0.0, 0.5),
+ax1.annotate("γ = 0: degenerate optimum at 50%; this solver run found a single-path agent", (0.0, 0.5),
              xytext=(10, -14), textcoords="offset points", color=INK2, fontsize=9)
-ax1.set_xlabel("Logged path information, bits per decision")
+ax1.set_xlabel("Path information in the which-path marker (Holevo χ, bits per decision)")
 ax1.set_ylabel("Expected accuracy")
 ax1.set_xlim(-0.03, 1.05)
 ax1.set_ylim(0.42, 1.03)
