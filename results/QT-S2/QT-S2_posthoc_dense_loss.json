@@ -1,0 +1,367 @@
+{
+  "note": "post-hoc, not pre-registered",
+  "restarts": 8,
+  "steps": 1000,
+  "rows": [
+    {
+      "acc_max": 1.0,
+      "click_at_max": 1.0,
+      "cond_acc_at_max": 1.0,
+      "info_opt_bits": 1.4964693559512202e-13,
+      "post_loss_balance_phase_over_plain": 1.0000000000519635,
+      "gamma": 1.0,
+      "epsilon": 0.0
+    },
+    {
+      "acc_max": 0.9750000000000003,
+      "click_at_max": 1.0000000000000002,
+      "cond_acc_at_max": 0.9750000000000001,
+      "info_opt_bits": 0.16866093149677025,
+      "post_loss_balance_phase_over_plain": 0.9999999999833293,
+      "gamma": 0.95,
+      "epsilon": 0.0
+    },
+    {
+      "acc_max": 0.9500000000000002,
+      "click_at_max": 1.0,
+      "cond_acc_at_max": 0.9500000000000002,
+      "info_opt_bits": 0.28639695711605606,
+      "post_loss_balance_phase_over_plain": 0.9999999999755413,
+      "gamma": 0.9,
+      "epsilon": 0.0
+    },
+    {
+      "acc_max": 0.925,
+      "click_at_max": 1.0000000000000002,
+      "cond_acc_at_max": 0.9249999999999998,
+      "info_opt_bits": 0.3843115441265966,
+      "post_loss_balance_phase_over_plain": 1.000000000024832,
+      "gamma": 0.85,
+      "epsilon": 0.0
+    },
+    {
+      "acc_max": 0.9000000000000002,
+      "click_at_max": 1.0000000000000002,
+      "cond_acc_at_max": 0.9,
+      "info_opt_bits": 0.4689955935893806,
+      "post_loss_balance_phase_over_plain": 1.0000000000097184,
+      "gamma": 0.8,
+      "epsilon": 0.0
+    },
+    {
+      "acc_max": 0.8750000000000001,
+      "click_at_max": 1.0,
+      "cond_acc_at_max": 0.8750000000000001,
+      "info_opt_bits": 0.5435644431996961,
+      "post_loss_balance_phase_over_plain": 0.9999999999771528,
+      "gamma": 0.75,
+      "epsilon": 0.0
+    },
+    {
+      "acc_max": 0.8500000000000001,
+      "click_at_max": 1.0,
+      "cond_acc_at_max": 0.8500000000000001,
+      "info_opt_bits": 0.6098403047165004,
+      "post_loss_balance_phase_over_plain": 0.9999999999838808,
+      "gamma": 0.7,
+      "epsilon": 0.0
+    },
+    {
+      "acc_max": 0.8250000000000002,
+      "click_at_max": 1.0,
+      "cond_acc_at_max": 0.8250000000000002,
+      "info_opt_bits": 0.6690158350566572,
+      "post_loss_balance_phase_over_plain": 0.9999999999823728,
+      "gamma": 0.65,
+      "epsilon": 0.0
+    },
+    {
+      "acc_max": 0.8000000000000003,
+      "click_at_max": 1.0000000000000002,
+      "cond_acc_at_max": 0.8,
+      "info_opt_bits": 0.7219280948874617,
+      "post_loss_balance_phase_over_plain": 0.9999999999896811,
+      "gamma": 0.6,
+      "epsilon": 0.0
+    },
+    {
+      "acc_max": 0.7750000000000001,
+      "click_at_max": 1.0,
+      "cond_acc_at_max": 0.7750000000000001,
+      "info_opt_bits": 0.7691928290131136,
+      "post_loss_balance_phase_over_plain": 1.0000000000187317,
+      "gamma": 0.55,
+      "epsilon": 0.0
+    },
+    {
+      "acc_max": 0.75,
+      "click_at_max": 1.0,
+      "cond_acc_at_max": 0.75,
+      "info_opt_bits": 0.8112781244592324,
+      "post_loss_balance_phase_over_plain": 0.9999999999860684,
+      "gamma": 0.5,
+      "epsilon": 0.0
+    },
+    {
+      "acc_max": 0.725,
+      "click_at_max": 0.9999999999999999,
+      "cond_acc_at_max": 0.7250000000000001,
+      "info_opt_bits": 0.8485481782947158,
+      "post_loss_balance_phase_over_plain": 1.000000000074182,
+      "gamma": 0.45,
+      "epsilon": 0.0
+    },
+    {
+      "acc_max": 0.7000000000000002,
+      "click_at_max": 1.0000000000000002,
+      "cond_acc_at_max": 0.7000000000000001,
+      "info_opt_bits": 0.881290899230792,
+      "post_loss_balance_phase_over_plain": 0.9999999999477726,
+      "gamma": 0.4,
+      "epsilon": 0.0
+    },
+    {
+      "acc_max": 0.6750000000000002,
+      "click_at_max": 1.0,
+      "cond_acc_at_max": 0.6750000000000002,
+      "info_opt_bits": 0.9097361225312658,
+      "post_loss_balance_phase_over_plain": 1.00000000006228,
+      "gamma": 0.35,
+      "epsilon": 0.0
+    },
+    {
+      "acc_max": 0.6500000000000001,
+      "click_at_max": 1.0000000000000002,
+      "cond_acc_at_max": 0.65,
+      "info_opt_bits": 0.9340680553755907,
+      "post_loss_balance_phase_over_plain": 0.9999999999533322,
+      "gamma": 0.3,
+      "epsilon": 0.0
+    },
+    {
+      "acc_max": 0.6250000000000002,
+      "click_at_max": 1.0000000000000002,
+      "cond_acc_at_max": 0.6250000000000001,
+      "info_opt_bits": 0.9544340029250646,
+      "post_loss_balance_phase_over_plain": 0.9999999999358276,
+      "gamma": 0.25,
+      "epsilon": 0.0
+    },
+    {
+      "acc_max": 0.6000000000000001,
+      "click_at_max": 1.0000000000000002,
+      "cond_acc_at_max": 0.6,
+      "info_opt_bits": 0.9709505944547683,
+      "post_loss_balance_phase_over_plain": 1.0000000000397145,
+      "gamma": 0.2,
+      "epsilon": 0.0
+    },
+    {
+      "acc_max": 0.5750000000000001,
+      "click_at_max": 1.0,
+      "cond_acc_at_max": 0.5750000000000001,
+      "info_opt_bits": 0.9837082626232854,
+      "post_loss_balance_phase_over_plain": 1.0000000000200024,
+      "gamma": 0.15,
+      "epsilon": 0.0
+    },
+    {
+      "acc_max": 0.5500000000000002,
+      "click_at_max": 1.0000000000000002,
+      "cond_acc_at_max": 0.55,
+      "info_opt_bits": 0.9927744539879079,
+      "post_loss_balance_phase_over_plain": 0.9999999999327689,
+      "gamma": 0.1,
+      "epsilon": 0.0
+    },
+    {
+      "acc_max": 0.5250000000000002,
+      "click_at_max": 1.0000000000000002,
+      "cond_acc_at_max": 0.5250000000000001,
+      "info_opt_bits": 0.9981958790429099,
+      "post_loss_balance_phase_over_plain": 0.9999999998834145,
+      "gamma": 0.05,
+      "epsilon": 0.0
+    },
+    {
+      "acc_max": 0.8500000000000002,
+      "click_at_max": 0.8764705882381625,
+      "cond_acc_at_max": 0.9697986577149472,
+      "info_opt_bits": 1.494867642699313e-13,
+      "post_loss_balance_phase_over_plain": 0.4899999999806582,
+      "gamma": 1.0,
+      "epsilon": 0.3
+    },
+    {
+      "acc_max": 0.8294286092748634,
+      "click_at_max": 0.877817023180499,
+      "cond_acc_at_max": 0.9448764234141699,
+      "info_opt_bits": 0.16397821013271308,
+      "post_loss_balance_phase_over_plain": 0.4809892902482842,
+      "gamma": 0.95,
+      "epsilon": 0.3
+    },
+    {
+      "acc_max": 0.8088945167620922,
+      "click_at_max": 0.8793049249452483,
+      "cond_acc_at_max": 0.9199249245788765,
+      "info_opt_bits": 0.27779677420007254,
+      "post_loss_balance_phase_over_plain": 0.4711892468325958,
+      "gamma": 0.9,
+      "epsilon": 0.3
+    },
+    {
+      "acc_max": 0.7884040451068206,
+      "click_at_max": 0.8809572778614818,
+      "cond_acc_at_max": 0.8949401576211123,
+      "info_opt_bits": 0.3716361098216182,
+      "post_loss_balance_phase_over_plain": 0.4604949106316125,
+      "gamma": 0.85,
+      "epsilon": 0.3
+    },
+    {
+      "acc_max": 0.7679650127928506,
+      "click_at_max": 0.8828021797575435,
+      "cond_acc_at_max": 0.8699174406249968,
+      "info_opt_bits": 0.4518221965217812,
+      "post_loss_balance_phase_over_plain": 0.44878280050341823,
+      "gamma": 0.8,
+      "epsilon": 0.3
+    },
+    {
+      "acc_max": 0.7475871975140986,
+      "click_at_max": 0.8848742916281969,
+      "cond_acc_at_max": 0.8448513021420414,
+      "info_opt_bits": 0.5212534022317645,
+      "post_loss_balance_phase_over_plain": 0.43590698928726057,
+      "gamma": 0.75,
+      "epsilon": 0.3
+    },
+    {
+      "acc_max": 0.727282980003837,
+      "click_at_max": 0.8872167827658495,
+      "cond_acc_at_max": 0.8197353726071009,
+      "info_opt_bits": 0.5815124577563073,
+      "post_loss_balance_phase_over_plain": 0.42169431018716635,
+      "gamma": 0.7,
+      "epsilon": 0.3
+    },
+    {
+      "acc_max": 0.7070682541513668,
+      "click_at_max": 0.8898839636673119,
+      "cond_acc_at_max": 0.7945623058959945,
+      "info_opt_bits": 0.633492475989035,
+      "post_loss_balance_phase_over_plain": 0.40593857398054195,
+      "gamma": 0.65,
+      "epsilon": 0.3
+    },
+    {
+      "acc_max": 0.6869637379485949,
+      "click_at_max": 0.8929448750678208,
+      "cond_acc_at_max": 0.7693237926881195,
+      "info_opt_bits": 0.677632061053592,
+      "post_loss_balance_phase_over_plain": 0.3883937701179388,
+      "gamma": 0.6,
+      "epsilon": 0.3
+    },
+    {
+      "acc_max": 0.6669969008066015,
+      "click_at_max": 0.89648819865832,
+      "cond_acc_at_max": 0.7440107988089814,
+      "info_opt_bits": 0.7139964831750425,
+      "post_loss_balance_phase_over_plain": 0.36876647775257154,
+      "gamma": 0.55,
+      "epsilon": 0.3
+    },
+    {
+      "acc_max": 0.6472048604328898,
+      "click_at_max": 0.9006289555428371,
+      "cond_acc_at_max": 0.7186143155288621,
+      "info_opt_bits": 0.7422710082946871,
+      "post_loss_balance_phase_over_plain": 0.346708334954982,
+      "gamma": 0.5,
+      "epsilon": 0.3
+    },
+    {
+      "acc_max": 0.6276388412915948,
+      "click_at_max": 0.9055174907652062,
+      "cond_acc_at_max": 0.6931272423696747,
+      "info_opt_bits": 0.7616777057813453,
+      "post_loss_balance_phase_over_plain": 0.3218108406155822,
+      "gamma": 0.45,
+      "epsilon": 0.3
+    },
+    {
+      "acc_max": 0.6083712082089225,
+      "click_at_max": 0.911350961854558,
+      "cond_acc_at_max": 0.6675487640578276,
+      "info_opt_bits": 0.7707975894891066,
+      "post_loss_balance_phase_over_plain": 0.2936079692152642,
+      "gamma": 0.4,
+      "epsilon": 0.3
+    },
+    {
+      "acc_max": 0.5895068387636211,
+      "click_at_max": 0.9183862147295938,
+      "cond_acc_at_max": 0.6418942589825276,
+      "info_opt_bits": 0.7672531628918331,
+      "post_loss_balance_phase_over_plain": 0.2615991570714413,
+      "gamma": 0.35,
+      "epsilon": 0.3
+    },
+    {
+      "acc_max": 0.5712019151721345,
+      "click_at_max": 0.9269483764014368,
+      "cond_acc_at_max": 0.6162176122360045,
+      "info_opt_bits": 0.7471800346655788,
+      "post_loss_balance_phase_over_plain": 0.22532056553928498,
+      "gamma": 0.3,
+      "epsilon": 0.3
+    },
+    {
+      "acc_max": 0.5536953767623376,
+      "click_at_max": 0.9374157276090648,
+      "cond_acc_at_max": 0.5906614967668304,
+      "info_opt_bits": 0.7044243378422615,
+      "post_loss_balance_phase_over_plain": 0.18452438309306818,
+      "gamma": 0.25,
+      "epsilon": 0.3
+    },
+    {
+      "acc_max": 0.5373610252712212,
+      "click_at_max": 0.9501236858830796,
+      "cond_acc_at_max": 0.5655695497915919,
+      "info_opt_bits": 0.6296209168204839,
+      "post_loss_balance_phase_over_plain": 0.139584620938957,
+      "gamma": 0.2,
+      "epsilon": 0.3
+    },
+    {
+      "acc_max": 0.5227880360780398,
+      "click_at_max": 0.9650447483232875,
+      "cond_acc_at_max": 0.5417241397213501,
+      "info_opt_bits": 0.5104113922503444,
+      "post_loss_balance_phase_over_plain": 0.09231903793035473,
+      "gamma": 0.15,
+      "epsilon": 0.3
+    },
+    {
+      "acc_max": 0.5108778201865882,
+      "click_at_max": 0.981000064693194,
+      "cond_acc_at_max": 0.5207724632988321,
+      "info_opt_bits": 0.337892941010789,
+      "post_loss_balance_phase_over_plain": 0.047330788799943735,
+      "gamma": 0.1,
+      "epsilon": 0.3
+    },
+    {
+      "acc_max": 0.5028620575068199,
+      "click_at_max": 0.9944862919728917,
+      "cond_acc_at_max": 0.5056500643253986,
+      "info_opt_bits": 0.1319710763701544,
+      "post_loss_balance_phase_over_plain": 0.013106197891652165,
+      "gamma": 0.05,
+      "epsilon": 0.3
+    }
+  ]
+}

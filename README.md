@@ -26,6 +26,10 @@ The trade-off itself follows from the Englert duality relation (D² + V² ≤ 1)
 
 ![QT-S2](results/QT-S2/QT-S2_figure.png)
 
+**Post-hoc check, not pre-registered** (`src/qt_s2_posthoc_dense.py`, `results/QT-S2/QT-S2_posthoc_dense_loss.json`)
+
+The pre-registered grid had four log levels, so a chart connecting them hid the shape of the loss curve. A dense grid (log strength in steps of 0.05, exact ceilings) shows it: with 30% loss the loggable path information rises to 0.77 bit at gamma_log = 0.4 and then falls to 0.13 bit at gamma_log = 0.05, as the agent moves the photon off the lossy paths. With ideal optics the ceiling follows the QT-S1 bound at all 20 levels.
+
 ## Hypothesis verdicts
 
 | Study | Hypothesis | Verdict |
@@ -59,6 +63,11 @@ python ../../src/qt_s1_analyze.py
 cd ../QT-S2
 python ../../src/qt_s2_sim.py
 python ../../src/qt_s2_analyze.py
+python ../../src/qt_s2_posthoc_dense.py   # post-hoc dense grid, about 3 min
+
+# Images for the X post
+cd ../..
+python social/x_figures.py
 ```
 
 All randomness is seeded; with the same numpy version the results files are reproduced.
@@ -70,6 +79,7 @@ protocols/   study protocols, fixed before each main run
 src/         simulation and analysis code (QT-S2 reuses the QT-S1 model)
 results/     raw results, learning curves, summaries, hypothesis tests, figures, run logs
 reports/     results and interpretation for each study
+social/      images used in public posts and the script that draws them from results/
 ```
 
 ## Related work

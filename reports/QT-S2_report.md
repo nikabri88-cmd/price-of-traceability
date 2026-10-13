@@ -31,6 +31,10 @@ First segment: gamma_log 1.0 → 0.9. Last segment: gamma_log 0.6 → 0.2. Cost 
 - **E2, classical drift of learners.** End-of-training loggable information shows no trend with sigma (gamma_log 0.6: 0.72–0.74 bit; gamma_log 0.2: 0.52–0.61 bit against ceilings of 0.97–1.01). The QT-S1 drift toward classical deliberation under a heavy log replicates at every noise level.
 - At gamma_log = 0 the optimum stays degenerate (any path distribution gives accuracy 0.5), so logged information there carries no meaning. With sigma = 0.2 the noisy optimum spreads amplitude over more than two paths, so its loggable information slightly exceeds 1 bit (the measure allows up to 2 bits with 4 paths).
 
+## Post-hoc check (not pre-registered)
+
+A dense grid of log strength (steps of 0.05, exact ceilings, sigma = 0) for epsilon = 0 and 0.3 (src/qt_s2_posthoc_dense.py). With 30% loss, loggable path information peaks at 0.77 bit at gamma_log = 0.4 and falls to 0.13 bit at gamma_log = 0.05; the retreat is smooth across levels. The pre-registered values at gamma_log 0.6 and 0.2 are reproduced with 16 restarts and 1500 steps. With ideal optics the ceiling matches I = H2(accuracy) at all 20 levels.
+
 ## Findings
 
 1. **The shape of the price survives mirror noise.** Noise scales the price curve down and keeps its convexity: the last bits cost about 4.6 times more per bit than the first ones at every sigma tested.
