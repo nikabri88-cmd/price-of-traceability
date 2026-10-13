@@ -54,6 +54,13 @@ ax.annotate("First 0.29 bit\ncosts 5 points", (0.14, 0.976), xytext=(0.06, 0.80)
             weight="bold", arrowprops=dict(arrowstyle="-", color=BLUE, lw=1.5))
 ax.annotate("The last half bit\ncosts 39 points", (0.80, 0.765), xytext=(0.42, 0.62), color=ORANGE, fontsize=15,
             weight="bold", arrowprops=dict(arrowstyle="-", color=ORANGE, lw=1.5))
+def bracket(x0, x1, y, col, text):
+    ax.annotate("", (x0, y), (x1, y), arrowprops=dict(arrowstyle="|-|", color=col, lw=2, mutation_scale=6))
+    ax.text((x0 + x1) / 2, y + 0.012, text, ha="center", color=col, fontsize=13, weight="bold")
+
+
+bracket(0.0, 0.286, 0.515, BLUE, "first 0.29 bit")
+bracket(0.5, 1.0, 0.515, ORANGE, "last 0.5 bit")
 ax.text(1.0, 1.0, "Complete monitoring: accuracy falls to\nthe fully dephased baseline of 50%.\nThere the optimum is degenerate,\nso χ depends on the chosen solution",
         ha="right", va="top", fontsize=12, color=INK2, transform=ax.transAxes)
 fig.savefig("social/X_image1_price.png", dpi=150, facecolor=SURF)
