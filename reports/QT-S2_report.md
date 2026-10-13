@@ -60,12 +60,12 @@ A dense grid of log strength (steps of 0.05, exact ceilings, sigma = 0) for epsi
 
 1. **The shape of the price survives mirror noise.** Noise scales the price curve down and keeps its convexity: the last bits cost about 4.6 times more per bit than the first ones at every sigma tested.
 2. **Imperfect hardware loses less to complete monitoring in absolute terms.** It has less interference to lose: at sigma = 0.2 rad complete monitoring costs 0.32 accuracy instead of 0.50.
-3. **Under photon loss, monitoring shifts the optimum toward lossless paths.** With 30% loss on the phase-carrying paths, the share of probability on those paths falls from 41% with no monitoring to 17% at gamma_log = 0.2, and the optimum uses interference less; accuracy there is 53.7%, still above the classical 50%. The closed form A_max = (2 - ε + sqrt(ε² + 4γ²(1 - ε)))/4 (README) explains this from the optics of the task.
+3. **Under photon loss, monitoring shifts the optimum toward lossless paths.** With 30% loss on the phase-carrying paths, the share of probability on those paths falls from the first monitoring step on (41.2% at gamma_log = 1, 40.2% at 0.9) down to 16.6% at gamma_log = 0.2, and the optimum uses interference less; accuracy there is 53.7%, still above the fully dephased 50% baseline. Lost photons count as failures. Beyond gamma_log ≈ 0.4 the marker's path information also starts to fall. The closed form A_max = (2 - ε + sqrt(ε² + 4γ²(1 - ε)))/4 (README) explains this from the optics of the task.
 4. **Learning tolerates mirror noise up to 0.2 rad.**
 
 ## Reading for agent governance
 
-Monitoring demands and hardware imperfections interact. The more imperfect the hardware, the less complete monitoring costs in absolute terms. On lossy hardware, stronger monitoring also moves the best agent toward lossless paths, so it uses interference less.
+In this model, monitoring strength and hardware imperfections interact. The more imperfect the hardware, the less complete which-path monitoring costs in absolute terms. With path-dependent loss, stronger monitoring also moves the best agent toward lossless paths, so it uses interference less.
 
 ## Limits
 

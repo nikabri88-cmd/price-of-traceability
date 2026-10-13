@@ -31,12 +31,12 @@ Learning rate chosen at gamma = 1 on seeds 100–119, mean final accuracy: 0.02 
 ## Findings
 
 1. **The price is non-linear.** A marker holding up to 0.29 bit per decision costs 5 accuracy points; the step from 0.47 to 0.97 bit costs 30 points, and the last half bit (0.5 → 1) costs 39. The first bits are cheap; the last bits are expensive.
-2. **Complete monitoring makes interference useless.** At gamma = 0 the best accuracy is 50%, no better than a classical agent. The optimum is degenerate: the optimiser here found a single-path solution, but superposed solutions score the same, so superposition becomes useless without being forced out.
+2. **Complete monitoring makes interference useless.** At gamma = 0 accuracy falls to the fully dephased baseline of 50%, the limit of this model when interference is fully suppressed. The optimum is degenerate: the optimiser here found a single-path solution, but superposed solutions score the same, so superposition becomes useless without being forced out.
 3. **Exploratory, not pre-registered: learners under heavy monitoring use less superposition than the optimum.** At gamma = 0.2 learning agents end with 0.55 bit of path information in the marker versus 0.97 at the ceiling. Median learners reach 91–100% of their ceiling at every gamma.
 
 ## Reading for agent governance
 
-Monitoring a quantum agent's deliberation completely removes the part of performance carried by interference: the agent can do no better than a classical one. Partial monitoring costs little at first, and its price rises steeply with the last bits. In this toy, auditing at the level of inputs, outputs, learned parameters and run statistics costs nothing, and each bit of per-decision path record has a measurable price set by the Englert duality relation.
+In this model, extracting internal which-path information suppresses the interference that carries task information. Complete monitoring brings accuracy down to the fully dephased baseline of 50%; partial monitoring costs little at first, and its price rises steeply with the last bits of path information. In this toy, auditing at the level of inputs, outputs, learned parameters and run statistics costs nothing, and each bit of per-decision path record has a measurable price set by the Englert duality relation.
 
 ## Limits
 

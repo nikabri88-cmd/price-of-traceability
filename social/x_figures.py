@@ -41,7 +41,7 @@ def frame(title, subtitle):
 s1 = json.load(open("results/QT-S1/QT-S1_results.json"))["rows"]
 pts = [(r["info_opt_bits"], r["acc_max"]) for r in s1 if r["gamma"] > 0]
 fig, ax = frame("The price of watching a quantum agent think",
-                "First bits of path information are cheap, the last ones are expensive. Points: best agents")
+                "Line: analytical curve. Dots: optimised agents. First bits are cheap, the last ones expensive")
 acc = np.linspace(0.5, 1.0, 4000)
 h2_inv_half = acc[np.argmin(np.abs(h2(acc) - 0.5))]          # accuracy where 0.5 bit is reached (0.89)
 ax.plot(h2(acc), acc, color=INK2, lw=2, zorder=2)
@@ -54,25 +54,25 @@ ax.annotate("First 0.29 bit\ncosts 5 points", (0.14, 0.976), xytext=(0.06, 0.80)
             weight="bold", arrowprops=dict(arrowstyle="-", color=BLUE, lw=1.5))
 ax.annotate("The last half bit\ncosts 39 points", (0.80, 0.765), xytext=(0.42, 0.62), color=ORANGE, fontsize=15,
             weight="bold", arrowprops=dict(arrowstyle="-", color=ORANGE, lw=1.5))
-ax.text(1.0, 1.0, "Complete monitoring: 50%,\nno better than a classical agent",
+ax.text(1.0, 1.0, "Complete monitoring: accuracy falls to\nthe fully dephased baseline of 50%.\nThere the optimum is degenerate,\nso χ depends on the chosen solution",
         ha="right", va="top", fontsize=12, color=INK2, transform=ax.transAxes)
 fig.savefig("social/X_image1_price.png", dpi=150, facecolor=SURF)
 
 # ---- Image 2: under photon loss the agent backs off (QT-S2 post-hoc dense grid) ----
 d = json.load(open("results/QT-S2/QT-S2_posthoc_dense_loss.json"))["rows"]
-fig, ax = frame("Lossy optics: monitoring pushes the agent off lossy paths",
-                "Best agent as monitoring grows (dot = step of 0.05, post-hoc grid). Ideal optics vs 30% loss on some paths")
+fig, ax = frame("Lossy optics: monitoring pushes the best agent off lossy paths",
+                "Dots: optimised agents, monitoring step 0.05 (post-hoc grid). Lost photons count as failures")
 for eps, col, lab, xy in ((0.0, BLUE, "Ideal optics", (0.40, 0.935)), (0.3, ORANGE, "30% photon loss", (0.02, 0.765))):
     rows = [r for r in d if r["epsilon"] == eps]
     ax.plot([r["info_opt_bits"] for r in rows], [r["acc_max"] for r in rows], "-o", color=col, lw=2.5, ms=6,
             mec=SURF, mew=1.5, zorder=3)
     ax.text(*xy, lab, color=col, fontsize=15, weight="bold")
 peak = max((r for r in d if r["epsilon"] == 0.3), key=lambda r: r["info_opt_bits"])
-ax.annotate("From here on, stronger monitoring shifts the optimum\ntoward lossless paths and uses less interference",
+ax.annotate("Beyond this point, stronger monitoring yields less path\ninformation as the optimum shifts further toward lossless paths",
             (peak["info_opt_bits"], peak["acc_max"]), xytext=(0.06, 0.635), color=INK2, fontsize=14,
             arrowprops=dict(arrowstyle="->", color=MUTED, lw=1.5))
 end = next(r for r in d if r["epsilon"] == 0.3 and abs(r["gamma"] - 0.2) < 1e-9)
-ax.annotate("At this point still 53.7%, above the classical 50%:\ninterference is used less, not abandoned", (end["info_opt_bits"], end["acc_max"]),
+ax.annotate("Here still 53.7%, above the fully dephased 50% baseline:\ninterference is used less, not abandoned", (end["info_opt_bits"], end["acc_max"]),
             xytext=(0.06, 0.545), color=INK2, fontsize=12, arrowprops=dict(arrowstyle="-", color=MUTED, lw=1))
 fig.savefig("social/X_image2_loss.png", dpi=150, facecolor=SURF)
 print("saved")

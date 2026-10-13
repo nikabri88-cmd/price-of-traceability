@@ -10,9 +10,9 @@ The trade-off itself follows from the Englert duality relation (D² + V² ≤ 1)
 
 **QT-S1, ideal optics** ([report](reports/QT-S1_report.md))
 
-- The first bits are cheap: a marker holding up to 0.29 bit per decision costs 5 accuracy points.
-- The last bits are expensive: the last half bit (0.5 → 1 bit) costs 39 points.
-- Under complete monitoring the best accuracy is 50%, no better than a classical agent. The optimum is degenerate there: single-path and superposed agents score the same, so superposition becomes useless without being forced out.
+- The first bits are cheap: a marker holding up to 0.29 bit per decision costs 5 accuracy points (optimised agents).
+- The last bits are expensive: on the analytical curve, the last half bit (0.5 → 1 bit) costs 39 points.
+- Under complete monitoring accuracy falls to the fully dephased baseline of 50%, the limit of this model when interference is fully suppressed. The optimum is degenerate there: single-path and superposed agents score the same, so the marker's χ at that point depends on which solution is chosen.
 - Learning agents end with less path superposition under heavy monitoring than the optimum uses (exploratory).
 
 ![QT-S1](results/QT-S1/QT-S1_figure.png)
@@ -21,7 +21,7 @@ The trade-off itself follows from the Englert duality relation (D² + V² ≤ 1)
 
 - The shape of the price survives mirror noise: the last bits cost about 4.6 times more per bit than the first ones at every noise level tested.
 - Imperfect hardware loses less to complete monitoring in absolute terms: at 0.2 rad of noise it costs 0.32 accuracy instead of 0.50.
-- With 30% photon loss on the phase-carrying paths, stronger monitoring shifts the optimum toward the lossless paths (share of probability on the lossy paths 41% with no monitoring, 17% at gamma_log = 0.2) and reduces its use of interference. Accuracy stays above the classical 50% (53.7% at gamma_log = 0.2).
+- With 30% photon loss on the phase-carrying paths, stronger monitoring shifts the optimum toward the lossless paths (share of probability on the lossy paths 41% with no monitoring, 17% at gamma_log = 0.2) and reduces its use of interference. The shift starts with the first monitoring step (41.2% at gamma_log = 1, 40.2% at 0.9); beyond gamma_log ≈ 0.4 the marker's path information also starts to fall. Accuracy stays above the fully dephased 50% baseline (53.7% at gamma_log = 0.2). Lost photons count as failures.
 - Learning tolerates mirror noise up to 0.2 rad.
 
 ![QT-S2](results/QT-S2/QT-S2_figure.png)
@@ -40,11 +40,18 @@ with ε the loss on the phase-carrying paths and γ the coherence the marker lea
 
 ## Corrections after independent review (2026-10-13)
 
+Two rounds of review on the same day. The points below are the state after both.
+
 1. **Axis meaning.** Earlier text called the x-axis "logged bits". It is the Holevo information χ of the which-path marker, an upper bound on extractable path information; no readout is simulated.
-2. **Complete monitoring.** Earlier text said the optimal agent "drops superposition". The optimum is degenerate: QT-S1 found a single-path solution (0 bit), QT-S2 under identical conditions found one holding 0.49 bit, and an equal two-path superposition (1 bit) scores the same 50%. Interference becomes useless; superposition is not forced out.
-3. **Loss.** Earlier text said the agent "retreats from superposition". It shifts probability toward lossless paths and uses interference less, while staying above 50%.
-4. **Arithmetic.** Earlier text said "the next half bit costs 30 points". From 0.29 to 0.79 bit the cost is 18.5 points; the 30 points belong to the step from 0.47 to 0.97 bit, and the last half bit (0.5 → 1) costs 39.
-5. **Learning under loss (code bug).** `reinforce2()` skipped episodes where the photon was lost. With a reward baseline b this adds a bias of -b ∇P(click). Fixed by including the no-click outcome in the score function; the loss-series learners were re-run (`results/QT-S2/QT-S2_L_learners_fixed.json`). Ceilings and all lossless results are unaffected; the fixed code reproduces the lossless learner curves exactly.
+2. **Complete monitoring.** Earlier text said the optimal agent "drops superposition" and later that it is "no better than a classical agent". The optimum is degenerate: QT-S1 found a single-path solution (0 bit), QT-S2 under identical conditions found one holding 0.49 bit, and an equal two-path superposition (1 bit) scores the same 50%. Accuracy falls to the fully dephased baseline of this model; no comparison with classical AI in general was made.
+3. **Loss.** Earlier text said the agent "retreats from superposition", and a figure suggested the shift begins at the turn of the curve. The optimum shifts probability toward lossless paths from the first monitoring step and uses interference less, while staying above the fully dephased 50% baseline; only the marker's path information turns down beyond gamma_log ≈ 0.4.
+4. **Arithmetic.** Earlier text said "the next half bit costs 30 points". From 0.29 to 0.79 bit the cost is 18.5 points; the 30 points belong to the step between the simulated points at 0.47 and 0.97 bit, and on the analytical curve the last half bit (0.5 → 1) costs 39.
+5. **Learning under loss (code bug).**
+   - *Documented:* `reinforce2()` skipped episodes where the photon was lost. With a reward baseline b this adds a bias of -b ∇P(click) to the learning update.
+   - *Fixed in code:* the no-click outcome is now part of the score function (`src/qt_s2_sim.py`).
+   - *Re-run:* the 10 loss-series learner conditions, results in `results/QT-S2/QT-S2_L_learners_fixed.json`, compared with the original in `reports/QT-S2_report.md`. The original files are kept unchanged.
+   - *Unaffected:* all optimum (ceiling) results and figures, which use a separate function, and all lossless learner results, which the fixed code reproduces exactly.
+6. **Scope of the claim.** Earlier text said that monitoring and quantum advantage "trade off" in general. The supported statement is narrower: in this model, extracting internal which-path information suppresses the interference that carries task information.
 
 ## Hypothesis verdicts
 
