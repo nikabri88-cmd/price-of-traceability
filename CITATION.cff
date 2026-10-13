@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Price of traceability in a single-photon learning agent (QT-S1, QT-S2)"
+version: 1.0.0
+date-released: 2026-10-13
+license: MIT
+authors:
+  - family-names: Ryzhkova
+    given-names: Julia
+    orcid: "https://orcid.org/0009-0005-4194-6059"
+  - name: "Claude (Opus 5.5, Anthropic)"
+keywords:
+  - quantum reinforcement learning
+  - photonic agents
+  - which-path information
+  - decoherence
+  - agent auditability
+  - traceability

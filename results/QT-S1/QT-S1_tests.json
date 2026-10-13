@@ -1,0 +1,9 @@
+{
+  "H1_max_abs_dev": 0.0,
+  "H1_pass": true,
+  "H2_max_abs_dev_bits": 1.0,
+  "H2_pass": false,
+  "H3_spearman_gamma_vs_episodes": -0.19047619047619052,
+  "H3a_pass(rho<0)": true,
+  "H3b_median_seed_reaches_at_gamma>=0.8": true
+}

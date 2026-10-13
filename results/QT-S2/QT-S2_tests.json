@@ -1,0 +1,155 @@
+{
+  "prices": [
+    {
+      "C_full_log_cost": 0.5,
+      "dI_first": 0.28639695711590585,
+      "dI_last": 0.24902249956730638,
+      "cost_per_bit_first": 0.1745828604588304,
+      "cost_per_bit_last": 0.803140279884403,
+      "ratio_last_over_first": 4.600338645922216,
+      "note": null,
+      "setting": "sigma=0.0",
+      "kind": "sigma",
+      "level": 0.0
+    },
+    {
+      "C_full_log_cost": 0.48610997514357257,
+      "dI_first": 0.2867496264471228,
+      "dI_last": 0.2512846666129678,
+      "cost_per_bit_first": 0.16989838617573375,
+      "cost_per_bit_last": 0.7759567699713541,
+      "ratio_last_over_first": 4.567181522070175,
+      "note": null,
+      "setting": "sigma=0.05",
+      "kind": "sigma",
+      "level": 0.05
+    },
+    {
+      "C_full_log_cost": 0.44672983528802224,
+      "dI_first": 0.28805081408653943,
+      "dI_last": 0.2540709577351119,
+      "cost_per_bit_first": 0.15661083186364272,
+      "cost_per_bit_last": 0.7103258918174773,
+      "ratio_last_over_first": 4.53561151144348,
+      "note": null,
+      "setting": "sigma=0.1",
+      "kind": "sigma",
+      "level": 0.1
+    },
+    {
+      "C_full_log_cost": 0.31841028200118227,
+      "dI_first": 0.29464770054169975,
+      "dI_last": 0.25041247407487033,
+      "cost_per_bit_first": 0.1125790601099887,
+      "cost_per_bit_last": 0.5229557254028163,
+      "ratio_last_over_first": 4.645230870571254,
+      "note": null,
+      "setting": "sigma=0.2",
+      "kind": "sigma",
+      "level": 0.2
+    },
+    {
+      "C_full_log_cost": 0.4500000000000002,
+      "dI_first": 0.28563039547329805,
+      "dI_last": 0.20702584337879948,
+      "cost_per_bit_first": 0.16581265305064372,
+      "cost_per_bit_last": 0.9061371523952485,
+      "ratio_last_over_first": 5.464825124765897,
+      "note": null,
+      "setting": "epsilon=0.1",
+      "kind": "epsilon",
+      "level": 0.1
+    },
+    {
+      "C_full_log_cost": 0.3500000000000002,
+      "dI_first": 0.27779677420375964,
+      "dI_last": -0.048011144247792514,
+      "cost_per_bit_first": 0.14796962043827788,
+      "cost_per_bit_last": null,
+      "ratio_last_over_first": null,
+      "note": "undefined: logged information does not grow across the segment (optimal agent retreats from superposition)",
+      "setting": "epsilon=0.3",
+      "kind": "epsilon",
+      "level": 0.3
+    }
+  ],
+  "H1_pass_on_defined_settings": true,
+  "H1_defined_settings": 5,
+  "H1_undefined_settings": [
+    "epsilon=0.3"
+  ],
+  "H1_excluded_settings(C<0.05)": [],
+  "H2_C_by_sigma": [
+    0.5,
+    0.48610997514357257,
+    0.44672983528802224,
+    0.31841028200118227
+  ],
+  "H2_C_by_epsilon(0,0.1,0.3)": [
+    0.5,
+    0.4500000000000002,
+    0.3500000000000002
+  ],
+  "H2_violations(>0.01 rise)": [],
+  "H2_strictly_decreasing_sigma": true,
+  "H2_strictly_decreasing_epsilon": true,
+  "H2_pass": true,
+  "H3_rel_final_over_ceiling_gamma1": {
+    "0.0": 0.9492282472953526,
+    "0.05": 0.9284818423805667,
+    "0.1": 0.948289390717046,
+    "0.2": 0.9459235503151637
+  },
+  "H3_pass": false,
+  "E1_gamma1_loss": [
+    {
+      "epsilon": 0.0,
+      "acc_max": 1.0,
+      "click_at_max": 1.0,
+      "cond_acc_at_max": 1.0,
+      "post_loss_balance_phase_over_plain": 0.9999999999619101
+    },
+    {
+      "epsilon": 0.1,
+      "acc_max": 0.9500000000000002,
+      "click_at_max": 0.952631578946648,
+      "cond_acc_at_max": 0.9972375690615278,
+      "post_loss_balance_phase_over_plain": 0.810000000023412
+    },
+    {
+      "epsilon": 0.3,
+      "acc_max": 0.8500000000000003,
+      "click_at_max": 0.8764705882349318,
+      "cond_acc_at_max": 0.969798657718522,
+      "post_loss_balance_phase_over_plain": 0.4900000000024456
+    }
+  ],
+  "E2_learner_info_end": {
+    "0.6": {
+      "0.0": 0.7319485353998074,
+      "0.05": 0.7353677338012153,
+      "0.1": 0.7277301811409447,
+      "0.2": 0.7209908003139687
+    },
+    "0.2": {
+      "0.0": 0.5511381741067791,
+      "0.05": 0.5171741785369395,
+      "0.1": 0.6097017186939879,
+      "0.2": 0.5625048626887943
+    }
+  },
+  "E2_ceiling_info": {
+    "0.6": {
+      "0.0": 0.721928094887462,
+      "0.05": 0.7232594040374953,
+      "0.1": 0.7287384455292385,
+      "0.2": 0.7573528074115754
+    },
+    "0.2": {
+      "0.0": 0.9709505944547684,
+      "0.05": 0.9745440706504631,
+      "0.1": 0.9828094032643504,
+      "0.2": 1.0077652814864457
+    }
+  }
+}
