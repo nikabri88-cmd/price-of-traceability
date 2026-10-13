@@ -75,8 +75,8 @@ for eps, col, lab, xy in ((0.0, BLUE, "Ideal optics", (0.40, 0.935)), (0.3, ORAN
             mec=SURF, mew=1.5, zorder=3)
     ax.text(*xy, lab, color=col, fontsize=15, weight="bold")
 peak = max((r for r in d if r["epsilon"] == 0.3), key=lambda r: r["info_opt_bits"])
-ax.annotate("Beyond this point, stronger monitoring yields less path\ninformation as the optimum shifts further toward lossless paths",
-            (peak["info_opt_bits"], peak["acc_max"]), xytext=(0.06, 0.635), color=INK2, fontsize=14,
+ax.annotate("Past this point, stronger monitoring\nfinds less path information",
+            (peak["info_opt_bits"], peak["acc_max"]), xytext=(0.30, 0.635), color=INK2, fontsize=13,
             arrowprops=dict(arrowstyle="->", color=MUTED, lw=1.5))
 end = next(r for r in d if r["epsilon"] == 0.3 and abs(r["gamma"] - 0.2) < 1e-9)
 ax.annotate("Here still 53.7%, above the fully dephased 50% baseline:\ninterference is used less, not abandoned", (end["info_opt_bits"], end["acc_max"]),
