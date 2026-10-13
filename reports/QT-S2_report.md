@@ -23,15 +23,15 @@ First segment: gamma_log 1.0 → 0.9. Last segment: gamma_log 0.6 → 0.2. Cost 
 
 ## Hypotheses
 
-- **H1 supported on 5 of 6 settings, undefined on 1.** Ratios 4.5–5.5 against the threshold of 2. At epsilon = 0.3 the ratio is undefined: between gamma_log 0.6 and 0.2 the loggable information falls (0.68 → 0.63 bit), because the optimal agent moves amplitude away from the lossy phase-carrying paths. This setting is reported as undefined and kept out of the pass count.
+- **H1 supported on 5 of 6 settings, undefined on 1.** Ratios 4.5–5.5 against the threshold of 2. At epsilon = 0.3 the ratio is undefined: between gamma_log 0.6 and 0.2 the path information in the marker falls (0.68 → 0.63 bit), because the optimal agent moves amplitude away from the lossy phase-carrying paths. This setting is reported as undefined and kept out of the pass count.
 - **H2 supported.** C falls with sigma (0.500, 0.486, 0.447, 0.318) and with epsilon (0.500, 0.450, 0.350). Under loss, C = 0.5 - epsilon/2 to numerical precision.
 - **H3 rejected, by 0.001.** Median learner accuracy relative to the ceiling at gamma_log = 1: sigma 0 → 0.949, sigma 0.05 → 0.928 (threshold 0.929), sigma 0.1 → 0.948, sigma 0.2 → 0.946. Substantively, noise up to 0.2 rad keeps learners within 2.1 points of their noiseless relative performance. This replicates the tolerance part of Flamini et al. (2020); the benefit part was not observed. The learning rate was reused from QT-S1 without re-tuning.
 
 ## Exploratory
 
-- **E1, loss compensation.** With no log, the optimal agent takes an intermediate strategy: it puts less amplitude into the lossy path (pre-loss weight ratio about 1 - epsilon; post-loss balance 0.81 at epsilon 0.1 and 0.49 at 0.3), trading a little interference for more clicks. Ceiling = 1 - epsilon/2; accuracy given a click 0.997 and 0.970. A heavier log strengthens the retreat (post-loss balance 0.14 at gamma_log 0.2, epsilon 0.3).
+- **E1, loss compensation.** With no log, the optimal agent takes an intermediate strategy: it puts less amplitude into the lossy path (pre-loss weight ratio about 1 - epsilon; post-loss balance 0.81 at epsilon 0.1 and 0.49 at 0.3), trading a little interference for more clicks. Ceiling = 1 - epsilon/2; accuracy given a click 0.997 and 0.970. Stronger monitoring strengthens this shift toward the lossless paths (post-loss balance 0.14 at gamma_log 0.2, epsilon 0.3).
 - **E2, superposition kept by learners.** End-of-training path information in the marker shows no trend with sigma (gamma_log 0.6: 0.72–0.74 bit; gamma_log 0.2: 0.52–0.61 bit against ceilings of 0.97–1.01). The QT-S1 pattern of learners using less superposition than the optimum under heavy monitoring replicates at every noise level.
-- At gamma_log = 0 the optimum stays degenerate (any path distribution gives accuracy 0.5), so logged information there carries no meaning. With sigma = 0.2 the noisy optimum spreads amplitude over more than two paths, so its loggable information slightly exceeds 1 bit (the measure allows up to 2 bits with 4 paths).
+- At gamma_log = 0 the optimum stays degenerate (any path distribution gives accuracy 0.5), so the path information in the marker there carries no meaning. With sigma = 0.2 the noisy optimum spreads amplitude over more than two paths, so its path information in the marker slightly exceeds 1 bit (the measure allows up to 2 bits with 4 paths).
 
 ## Learners under loss after the fix
 
@@ -54,7 +54,7 @@ As the bias predicts, the original learners under a complete log fell below 50% 
 
 ## Post-hoc check (not pre-registered)
 
-A dense grid of log strength (steps of 0.05, exact ceilings, sigma = 0) for epsilon = 0 and 0.3 (src/qt_s2_posthoc_dense.py). With 30% loss, loggable path information peaks at 0.77 bit at gamma_log = 0.4 and falls to 0.13 bit at gamma_log = 0.05; the retreat is smooth across levels. The pre-registered values at gamma_log 0.6 and 0.2 are reproduced with 16 restarts and 1500 steps. With ideal optics the ceiling matches I = H2(accuracy) at all 20 levels.
+A dense grid of log strength (steps of 0.05, exact ceilings, sigma = 0) for epsilon = 0 and 0.3 (src/qt_s2_posthoc_dense.py). With 30% loss, the path information in the marker peaks at 0.77 bit at gamma_log = 0.4 and falls to 0.13 bit at gamma_log = 0.05; the shift toward lossless paths is smooth across levels. The pre-registered values at gamma_log 0.6 and 0.2 are reproduced with 16 restarts and 1500 steps. With ideal optics the ceiling matches I = H2(accuracy) at all 20 levels.
 
 ## Findings
 

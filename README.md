@@ -51,7 +51,7 @@ with ε the loss on the phase-carrying paths and γ the coherence the marker lea
 | Study | Hypothesis | Verdict |
 |---|---|---|
 | QT-S1 | H1 ceiling = (1 + gamma)/2 | supported |
-| QT-S1 | H2 logged bits = H2(accuracy) at the optimum | rejected as stated: holds for every gamma > 0, fails at gamma = 0 (degenerate optimum) |
+| QT-S1 | H2 marker path information (χ) = H2(accuracy) at the optimum | rejected as stated: holds for every gamma > 0, fails at gamma = 0 (degenerate optimum) |
 | QT-S1 | H3 learning slows as the log grows | formally supported, weak (rho = -0.19) |
 | QT-S2 | H1 non-linear price survives noise and loss | supported on 5 of 6 settings, undefined on 1 |
 | QT-S2 | H2 imperfect hardware lowers the full-log cost | supported |

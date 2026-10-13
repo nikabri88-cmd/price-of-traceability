@@ -95,7 +95,7 @@ for ax in (ax1, ax2):
     for sp in ("top", "right"):
         ax.spines[sp].set_visible(False)
 
-# Panel A: accuracy vs logged information
+# Panel A: accuracy vs path information in the marker (Holevo chi)
 acc_line = np.linspace(0.5, 1.0, 400)
 ax1.plot(h2(acc_line), acc_line, color=INK2, lw=2, label="Bound: I = H2(accuracy)")
 I1 = [s["logged_info_bits_M1"] for s in summary]
